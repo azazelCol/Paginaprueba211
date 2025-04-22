@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quira Consultores SAS - Servicios Legales y Administrativos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a3e72;
+            --secondary-color: #e8a017;
+            --accent-color: #2c5282;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #333;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+        
+        .fadeIn {
+            animation-name: fadeIn;
+        }
+        
+        .slideInLeft {
+            animation-name: slideInLeft;
+        }
+        
+        .slideInRight {
+            animation-name: slideInRight;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(26, 62, 114, 0.95);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 62, 114, 0.8), rgba(26, 62, 114, 0.8)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 2rem;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation-delay: 0.3s;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            animation-delay: 0.6s;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            animation-delay: 0.9s;
+        }
+        
+        .btn:hover {
+            background-color: #d18f15;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* About Section */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text {
+            animation-delay: 0.3s;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image {
+            position: relative;
+            animation-delay: 0.6s;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Mission Vision Values */
+        .mvv-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .mvv-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        
+        .mvv-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mvv-card i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .mvv-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: #f5f7fa;
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Team Section */
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid var(--light-color);
+        }
+        
+        .team-member h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-member p {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        /* Clients Section */
+        .clients {
+            background-color: #f5f7fa;
+        }
+        
+        .clients-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .client-logo {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            height: 100px;
+        }
+        
+        .client-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .client-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        
+        .client-logo:hover img {
+            filter: grayscale(0);
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            animation-delay: 0.3s;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details {
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+        }
+        
+        .contact-form {
+            animation-delay: 0.6s;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #d18f15;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .mvv-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#" class="logo">QUIRA <span>CONSULTORES</span></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Quiénes Somos</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#team">Equipo</a></li>
+                    <li><a href="#clients">Clientes</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content animated fadeIn">
+            <h1>Soluciones Legales y Administrativas Estratégicas</h1>
+            <p>Somos una empresa líder en la prestación de servicios legales y administrativos, el aliado por excelencia que comprende el lenguaje de los CEOs y alta gerencia, traduciendo sus ideas en soluciones legales y financieras estratégicas e innovadoras.</p>
+            <a href="#contact" class="btn">Contáctenos</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>Quiénes Somos</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text animated fadeIn">
+                <h3>Nuestra Empresa</h3>
+                <p>Nos hemos dedicado a blindar el patrimonio de entidades privadas y públicas mediante la implementación de prácticas seguras, consultorías preventivas, procesos conciliatorios y de recuperación de cartera, auditorias legales, acompañamiento vigilancia y control de procesos civiles, comerciales, laborales y la defensa eficiente de sus intereses.</p>
+                <p>La empresa cuenta con profesionales altamente capacitados especialistas en: Derecho Laboral, Seguridad Social, Gerencia de Salud Ocupacional entre otras, así como de un grupo interdisciplinario para la defensa jurídica en instancias administrativas, judiciales y extrajudiciales, garantizando los intereses de nuestros clientes.</p>
+            </div>
+            <div class="about-image animated fadeIn">
+                <!-- Espacio para imagen -->
+                <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo de Quira Consultores">
+            </div>
+        </div>
+
+        <!-- Mission, Vision, Values -->
+        <div class="mvv-container">
+            <div class="mvv-card animated slideInLeft">
+                <i class="fas fa-bullseye"></i>
+                <h3>Misión</h3>
+                <p>Quira Consultores y servicios Integrales S.A.S., es una firma de consultoría y asesoría de abogados y profesionales que con un enfoque multidisciplinario asesora, representa y brinda soluciones jurídicas integrales y de valor mediante el diseño personalizado e individualizado a entidades privadas y/o públicas, en aras de la defensa de sus derechos, planteando las mejores alternativas para conseguir un mejor resultado, en el marco de políticas de excelencia, calidad y responsabilidad.</p>
+            </div>
+            <div class="mvv-card animated fadeIn">
+                <i class="fas fa-eye"></i>
+                <h3>Visión</h3>
+                <p>Para el 2025, Quira Consultores y Servicios Integrales S.A.S., liderará la prestación de servicios de consultorías, asesorías, recuperación de cartera, prestación del servicio jurídico en las diferentes áreas del derecho, especialmente en el área del Derecho Civil, Laboral y Comercial, ante las distintas entidades privadas, públicas, empresas industriales y comerciales del estado y/o de carácter privado a través de alianzas estratégicas como una de las mejores y más eficientes firmas de abogados y consultores en el mercado de la región Norte de Colombia.</p>
+            </div>
+            <div class="mvv-card animated slideInRight">
+                <i class="fas fa-gem"></i>
+                <h3>Valores Corporativos</h3>
+                <ul style="text-align: left; padding-left: 1.5rem;">
+                    <li>Ética</li>
+                    <li>Excelencia</li>
+                    <li>Innovación y creatividad</li>
+                    <li>Anticipación</li>
+                    <li>Honestidad</li>
+                    <li>Orientación al Cliente</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+        </div>
+        <div class="services-container">
+            <div class="service-card animated fadeIn" style="animation-delay: 0.1s;">
+                <i class="fas fa-search"></i>
+                <h3>Auditorías</h3>
+                <p>En materia laboral, seguridad social, sistema de gestión en seguridad, salud en el trabajo y ambiente, calidad y RUC, a los colaboradores de las sociedades comerciales o personas naturales, con el fin de determinar su debido cumplimiento con la normatividad vigente.</p>
+            </div>
+            <div class="service-card animated fadeIn" style="animation-delay: 0.2s;">
+                <i class="fas fa-gavel"></i>
+                <h3>Asesorías Jurídicas</h3>
+                <p>En el área del Derecho Laboral y Seguridad Social y en general en todas las áreas del Derecho.</p>
+            </div>
+            <div class="service-card animated fadeIn" style="animation-delay: 0.3s;">
+                <i class="fas fa-handshake"></i>
+                <h3>Manejo Estratégico del Conflicto</h3>
+                <p>Procesal y extraprocesal, emisión de conceptos jurídicos y acompañamiento en procesos de negociación.</p>
+            </div>
+            <div class="service-card animated fadeIn" style="animation-delay: 0.4s;">
+                <i class="fas fa-file-contract"></i>
+                <h3>Recuperación de Cartera</h3>
+                <p>Acompañamiento permanente en procesos de negociación, gestoría, concertación y/o conciliación, en el trámite de recuperación de cartera.</p>
+            </div>
+            <div class="service-card animated fadeIn" style="animation-delay: 0.5s;">
+                <i class="fas fa-balance-scale"></i>
+                <h3>Representación Judicial</h3>
+                <p>Representación judicial y extrajudicial en procesos ordinarios laborales y contencioso administrativos, conciliación laboral, extrajudiciales y Judiciales.</p>
+            </div>
+            <div class="service-card animated fadeIn" style="animation-delay: 0.6s;">
+                <i class="fas fa-briefcase"></i>
+                <h3>Derecho Laboral</h3>
+                <p>Asesoría y representación jurídica en los diversos asuntos de índole laboral y de seguridad social, en instancias judiciales y extrajudiciales.</p>
+            </div>
+            <div class="service-card animated fadeIn" style="animation-delay: 0.7s;">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Seguridad Social</h3>
+                <p>Manejo normativo y procedimientos del régimen general establecido para pensiones, salud, riesgos laborales, subsidio familiar y los servicios sociales complementarios que se definen en la ley.</p>
+            </div>
+            <div class="service-card animated fadeIn" style="animation-delay: 0.8s;">
+                <i class="fas fa-landmark"></i>
+                <h3>Derecho Administrativo</h3>
+                <p>Agotamiento de vía gubernativa, presentación y defensa de las diferentes acciones contenciosas, asistencia jurídica en diligencias administrativas y judiciales ante la autoridad administrativa que lo requiera.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+        <div class="section-title">
+            <h2>Nuestro Equipo</h2>
+        </div>
+        <div class="team-container">
+            <div class="team-member animated fadeIn" style="animation-delay: 0.1s;">
+                <!-- Espacio para imagen -->
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Rodolfo Nelson Quintero Ramirez">
+                <h3>Dr. Rodolfo Nelson Quintero Ramirez</h3>
+                <p>Gerente</p>
+                <p>Abogado especialista en Derecho Laboral y Seguridad Social con más de 20 años de experiencia.</p>
+            </div>
+            <div class="team-member animated fadeIn" style="animation-delay: 0.2s;">
+                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Dr. Diego Chavarro">
+                <h3>Dr. Diego Chavarro</h3>
+                <p>Abogado Especialista</p>
+            </div>
+            <div class="team-member animated fadeIn" style="animation-delay: 0.3s;">
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Dr. Gerardo Caballero">
+                <h3>Dr. Gerardo Caballero</h3>
+                <p>Abogado Especialista</p>
+            </div>
+            <div class="team-member animated fadeIn" style="animation-delay: 0.4s;">
+                <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Paola Quintero">
+                <h3>Paola Quintero</h3>
+                <p>Asesora Especialista e Inspector SSTA</p>
+            </div>
+            <div class="team-member animated fadeIn" style="animation-delay: 0.5s;">
+                <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Sr. Oscar Briñez">
+                <h3>Sr. Oscar Briñez</h3>
+                <p>Asesor Financiero y Contador</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="section clients" id="clients">
+        <div class="section-title">
+            <h2>Ellos Confían en Nosotros</h2>
+        </div>
+        <div class="clients-container">
+            <div class="client-logo animated fadeIn" style="animation-delay: 0.1s;">
+                <!-- Espacio para logo -->
+                <img src="https://via.placeholder.com/150x60?text=GASES+DEL+CARIBE" alt="GASES DEL CARIBE S.A. E.S.P.">
+            </div>
+            <div class="client-logo animated fadeIn" style="animation-delay: 0.2s;">
+                <img src="https://via.placeholder.com/150x60?text=GASES+DE+LA+GUAJIRA" alt="GASES DE LA GUAJIRA S.A. E.S.P.">
+            </div>
+            <div class="client-logo animated fadeIn" style="animation-delay: 0.3s;">
+                <img src="https://via.placeholder.com/150x60?text=GOBERNACION+DEL+ATLANTICO" alt="GOBERNACION DEL ATLANTICO">
+            </div>
+            <div class="client-logo animated fadeIn" style="animation-delay: 0.4s;">
+                <img src="https://via.placeholder.com/150x60?text=TRIPLE+A" alt="TRIPLE A S.A. E.S.P.">
+            </div>
+            <div class="client-logo animated fadeIn" style="animation-delay: 0.5s;">
+                <img src="https://via.placeholder.com/150x60?text=COLPENSIONES" alt="COLPENSIONES">
+            </div>
+            <div class="client-logo animated fadeIn" style="animation-delay: 0.6s;">
+                <img src="https://via.placeholder.com/150x60?text=PERSONERIA+DISTRITAL" alt="PERSONERIA DISTRITAL DE B/QUILLA">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-title">
+            <h2>Contacto</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info animated fadeIn">
+                <h3>Información de Contacto</h3>
+                <p>Estamos listos para atender sus necesidades legales y administrativas. Contáctenos para programar una consulta.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Dirección</h4>
+                            <p>Carrera 47 # 85-137 Piso 2, Barranquilla</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Teléfonos</h4>
+                            <p>605 3468384<br>300 8051483</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>rquintero@quiraconsultores.com<br>rodolfoquintero78@yahoo.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form animated fadeIn">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>QUIRA CONSULTORES</h3>
+                <p>Somos una empresa líder en la prestación de servicios legales y administrativos, el aliado por excelencia para la protección de su patrimonio.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="#">Auditorías</a></li>
+                    <li><a href="#">Asesorías Jurídicas</a></li>
+                    <li><a href="#">Recuperación de Cartera</a></li>
+                    <li><a href="#">Representación Judicial</a></li>
+                    <li><a href="#">Derecho Laboral</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Quiénes Somos</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#team">Equipo</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Horario de Atención</h3>
+                <p>Lunes a Viernes:<br>8:00 AM - 6:00 PM</p>
+                <p>Sábados:<br>9:00 AM - 1
